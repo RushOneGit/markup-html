@@ -33,7 +33,6 @@ gulp.task('browserSync', function() {
 	});
 });
 
-
 gulp.task('svgsprite', function () {
 	return gulp
 		.src('app/images/icons/*.svg')
@@ -196,9 +195,10 @@ gulp.task('scaffold', function() {
 	);
 });
 
-gulp.task('default', ['browserSync', 'js', 'scss'], function() {
+gulp.task('default', ['browserSync', 'js', 'scss', 'html'], function() {
 	gulp.watch('app/js/**/**', ['js']);
 	gulp.watch('app/scss/**', ['scss']);
+	gulp.watch('app/*.html', ['html']);
 });
 
 gulp.task('deploy', gulpSequence('clean', 'scaffold', ['js-deploy', 'css-deploy', 'images-deploy'], 'html-deploy', 'images', 'svg-images'));
