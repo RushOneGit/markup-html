@@ -18,7 +18,6 @@ var filter                = require('gulp-filter');
 var svgstore              = require('gulp-svgstore');
 var svgmin                = require('gulp-svgmin');
 
-
 gulp.task('browserSync', function() {
 	browserSync({
 		server: {
@@ -106,7 +105,7 @@ gulp.task('js-deploy', function() {
 });
 
 gulp.task('scss', function() {
-	return gulp.src('app/scss/style.scss')
+	return gulp.src('app/scss/main.scss')
 		.pipe(plumber({
 			errorHandler: function (err) {
 				console.log(err);
@@ -132,11 +131,11 @@ gulp.task('scss', function() {
 });
 
 gulp.task('css-deploy', function() {
-	return gulp.src('app/scss/style.scss')
+	return gulp.src('app/scss/main.scss')
 		.pipe(plumber())
 		.pipe(sass({
 			includePaths: [
-				'app/styles/scss',
+				'app/scss',
 			]
 		}))
 		.pipe(autoprefixer({
@@ -145,7 +144,7 @@ gulp.task('css-deploy', function() {
 		}))
 		.pipe(gcmq())
 		.pipe(csscomb())
-		.pipe(concat('style.css'))
+		.pipe(concat('main.css'))
 		.pipe(gulp.dest('dist/css'));
 });
 
@@ -185,14 +184,13 @@ gulp.task('clean', function() {
 });
 
 gulp.task('scaffold', function() {
-		return shell.task([
-			'mkdir dist',
-			'mkdir dist/fonts',
-			'mkdir dist/images',
-			'mkdir dist/js',
-			'mkdir dist/css'
-		]
-	);
+	return shell.task([
+		'mkdir dist',
+		'mkdir dist/fonts',
+		'mkdir dist/images',
+		'mkdir dist/js',
+		'mkdir dist/css'
+	]);
 });
 
 gulp.task('default', ['browserSync', 'js', 'scss', 'html'], function() {
