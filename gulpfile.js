@@ -160,10 +160,6 @@ gulp.task('html-deploy', function() {
 		.pipe(plumber())
 		.pipe(gulp.dest('dist'));
 
-	gulp.src('app/*.html')
-		.pipe(plumber())
-		.pipe(gulp.dest('dist'));
-
 	gulp.src('app/.*')
 		.pipe(plumber())
 		.pipe(gulp.dest('dist'));
